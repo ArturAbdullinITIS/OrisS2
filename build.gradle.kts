@@ -7,11 +7,15 @@ group = "org.example"
 version = "1.0-SNAPSHOT"
 
 val springVersion: String by project
+val springSecurityVersion: String by project
 val jakartaVersion: String by project
 val hibernateVersion: String by project
 val postgresVersion: String by project
 val freemarkerVersion: String by project
 val hikariVersion: String by project
+val springDataVersion: String by project
+
+
 
 repositories {
     mavenCentral()
@@ -25,6 +29,13 @@ dependencies {
     implementation("jakarta.servlet:jakarta.servlet-api:$jakartaVersion")
     implementation("org.hibernate.orm:hibernate-core:$hibernateVersion")
     implementation("org.postgresql:postgresql:$postgresVersion")
+
+    implementation("org.springframework.data:spring-data-jpa:${springDataVersion}")
+
+    implementation("org.springframework.security:spring-security-core:$springSecurityVersion")
+    implementation("org.springframework.security:spring-security-web:$springSecurityVersion")
+    implementation("org.springframework.security:spring-security-config:$springSecurityVersion")
+    implementation("org.springframework.security:spring-security-taglibs:$springSecurityVersion")
 
     implementation("org.freemarker:freemarker:$freemarkerVersion")
     implementation("com.zaxxer:HikariCP:$hikariVersion")
