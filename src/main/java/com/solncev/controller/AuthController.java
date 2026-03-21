@@ -1,24 +1,47 @@
 package com.solncev.controller;
 
-import com.solncev.dto.RegisterRequest;
-import com.solncev.model.User;
-import com.solncev.service.RegistrationService;
-import org.springframework.http.ResponseEntity;
+import com.solncev.dto.RegisterForm;
+import com.solncev.service.AuthService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/auth")
+@Controller
 public class AuthController {
 
-    private final RegistrationService registrationService;
+    private final AuthService authService;
 
-    public AuthController(RegistrationService registrationService) {
-        this.registrationService = registrationService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String registerForm(Model model) {
+        model.addAttribute("form", new RegisterForm());
+        return "register";
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-        User created = registrationService.register(request.getUsername(), request.getPassword());
-        return ResponseEntity.ok("Registered user id=" + created.getId());
+    public String register(@ModelAttribute("form") RegisterForm form,
+                           BindingResult bindingResult,
+                           Model model) {
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
+
+        try {
+            authService.register(form);
+        } catch (IllegalArgumentException ex) {
+            model.addAttribute("error", ex.getMessage());
+            return "register";
+        }
+
+        return "redirect:/login";
     }
 }
