@@ -2,6 +2,7 @@ plugins {
     id("java")
     id("org.springframework.boot") version "3.4.4"
     id("io.spring.dependency-management") version "1.1.7"
+    kotlin("jvm")
 }
 
 group = "org.example"
@@ -23,8 +24,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("javax.mail:javax.mail-api:1.6.2")
     implementation("org.springframework.security:spring-security-taglibs:${springSecurityVersion}")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.test {
     useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(17)
 }

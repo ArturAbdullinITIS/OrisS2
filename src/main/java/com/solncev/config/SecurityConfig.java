@@ -28,6 +28,8 @@ public class SecurityConfig {
                         .requestMatchers("/hello").hasRole("USER")
                         .requestMatchers("/admin/**").hasAnyRole("ADMIN")
                         .requestMatchers("/error/**").permitAll()
+                        .requestMatchers("/verification").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/users"))
                 .build();
