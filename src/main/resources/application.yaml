@@ -13,6 +13,10 @@ spring:
      ddl-auto: none
    show-sql: true
 
+  sql:
+    init:
+      mode: always
+
   liquibase:
     enabled: false
 

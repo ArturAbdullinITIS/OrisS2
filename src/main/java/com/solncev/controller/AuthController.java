@@ -2,7 +2,7 @@ package com.solncev.controller;
 
 import com.solncev.dto.RegisterRequest;
 import com.solncev.model.User;
-import com.solncev.service.RegistrationService;
+import com.solncev.service.impl.RegistrationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

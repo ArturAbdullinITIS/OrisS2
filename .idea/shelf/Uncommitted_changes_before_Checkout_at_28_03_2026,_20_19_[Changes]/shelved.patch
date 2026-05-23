@@ -1,0 +1,45 @@
+Index: build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\n    id(\"java\")\n    id(\"org.springframework.boot\") version \"3.4.4\"\n    id(\"io.spring.dependency-management\") version \"1.1.7\"\n}\n\ngroup = \"org.example\"\nversion = \"1.0-SNAPSHOT\"\n\nval springSecurityVersion: String by project\nval postgresVersion: String by project\n\nrepositories {\n    mavenCentral()\n}\n\ndependencies {\n    implementation(\"org.springframework.boot:spring-boot-starter-web\")\n    implementation(\"org.springframework.boot:spring-boot-starter-data-jpa\")\n    implementation(\"org.springframework.boot:spring-boot-starter-security\")\n    implementation(\"org.postgresql:postgresql:$postgresVersion\")\n    implementation(\"org.springframework.boot:spring-boot-starter-freemarker\")\n    implementation(\"org.springframework.boot:spring-boot-starter-mail\")\n    implementation(\"javax.mail:javax.mail-api:1.6.2\")\n    implementation(\"org.springframework.security:spring-security-taglibs:${springSecurityVersion}\")\n}\n\ntasks.test {\n    useJUnitPlatform()\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle.kts b/build.gradle.kts
+--- a/build.gradle.kts	(revision b0d7fb63b608e2c551b80dbb69dc05cc727ed047)
++++ b/build.gradle.kts	(date 1774717976103)
+@@ -1,5 +1,5 @@
+ plugins {
+-    id("java")
++    java
+     id("org.springframework.boot") version "3.4.4"
+     id("io.spring.dependency-management") version "1.1.7"
+ }
+@@ -7,9 +7,6 @@
+ group = "org.example"
+ version = "1.0-SNAPSHOT"
+ 
+-val springSecurityVersion: String by project
+-val postgresVersion: String by project
+-
+ repositories {
+     mavenCentral()
+ }
+@@ -18,13 +15,13 @@
+     implementation("org.springframework.boot:spring-boot-starter-web")
+     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+     implementation("org.springframework.boot:spring-boot-starter-security")
+-    implementation("org.postgresql:postgresql:$postgresVersion")
++    implementation("org.postgresql:postgresql:42.7.5")
+     implementation("org.springframework.boot:spring-boot-starter-freemarker")
+     implementation("org.springframework.boot:spring-boot-starter-mail")
+     implementation("javax.mail:javax.mail-api:1.6.2")
+-    implementation("org.springframework.security:spring-security-taglibs:${springSecurityVersion}")
++    implementation("org.springframework.security:spring-security-taglibs:6.4.2")
+ }
+ 
+ tasks.test {
+     useJUnitPlatform()
+-}
+\ No newline at end of file
++}

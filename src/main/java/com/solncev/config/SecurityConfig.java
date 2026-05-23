@@ -26,12 +26,15 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users").authenticated()
                         .requestMatchers("/hello").hasRole("USER")
-                        .requestMatchers("/admin/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/chat/public").permitAll()
+                        .requestMatchers("/chat/**").hasRole("USER")
+                        .requestMatchers("/ws", "/ws/**").hasRole("USER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/error/**").permitAll()
                         .requestMatchers("/verification").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .anyRequest().authenticated())
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/users"))
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/users", "/ws", "/ws/**", "/admin/messages/**"))
                 .build();
     }
 }
